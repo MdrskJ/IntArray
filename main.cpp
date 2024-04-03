@@ -1,35 +1,36 @@
 #include <bits/stdc++.h>
 #include "IntArray.h"
+#include "IntArrayRC.h"
 
 using namespace std;
 
 
-int main() {
+void test_IntArray() {
     IntArray a1;
-    for(auto i: a1) cout << i << ' ';
+    for (auto i: a1) cout << i << ' ';
     cout << "\n";
 
     int b2[] = {1, 2, 3};
     IntArray a2(b2, 2);
-    for(auto i: a2) cout << i << ' ';
+    for (auto i: a2) cout << i << ' ';
     cout << "\n";
 
     IntArray a3(a2);
-    for(auto i: a3) cout << i << ' ';
+    for (auto i: a3) cout << i << ' ';
     cout << "\n";
 
     IntArray a4(5, 3);
-    for(auto i: a4) cout << i << ' ';
+    for (auto i: a4) cout << i << ' ';
     cout << "\n________________________________________\n";
 
 
     int b1[] = {1, 3, 5, -200, 800};
-    IntArray c1 (b1, 5);
+    IntArray c1(b1, 5);
     cout << a1.size() << " -> ";
     a1 = c1;
     cout << a1.size() << "\n";
 
-    cout << a1.max() << " -> ";;
+    cout << a1.max() << " -> ";
     a1[4] = 1;
     cout << a1.max() << "\n";
 
@@ -37,20 +38,122 @@ int main() {
     a1[3] = 500;
     cout << a1.min() << "\n";
 
-    for(auto i: a1) cout << i << ' ';
+    for (auto i: a1) cout << i << ' ';
     a1.sort();
     cout << "-> ";
-    for(auto i: a1) cout << i << ' ';
+    for (auto i: a1) cout << i << ' ';
     cout << "\n";
 
     int ind_min = a1.find(a1.min());
     cout << ind_min << " -> " << a1[ind_min] << "\n";
 
-    if(a1 == a2) {
+    if (a1 == a2) {
         cout << "similar" << "\n";
     }
     if (a1 != a2) {
         cout << "different" << "\n";
     }
-    return 0;
+}
+
+
+void test_IntArrayRC() {
+    IntArrayRC a1;
+    for (auto i: a1) cout << i << ' ';
+    cout << "\n";
+
+    int b2[] = {1, 2, 3};
+    IntArrayRC a2(b2, 2);
+    for (auto i: a2) cout << i << ' ';
+    cout << "\n";
+
+    IntArrayRC a3(a2);
+    for (auto i: a3) cout << i << ' ';
+    cout << "\n";
+
+    IntArrayRC a4(5, 3);
+    for (auto i: a4) cout << i << ' ';
+    cout << "\n________________________________________\n";
+
+
+    int b1[] = {1, 3, 5, -200, 800};
+    IntArrayRC c1(b1, 5);
+    cout << a1.size() << " -> ";
+    a1 = c1;
+    cout << a1.size() << "\n";
+
+    cout << a1.max() << " -> ";
+    a1[4] = 1;
+    cout << a1.max() << "\n";
+
+    cout << a1.min() << " -> ";
+    a1[3] = 500;
+    cout << a1.min() << "\n";
+
+    for (auto i: a1) cout << i << ' ';
+    a1.sort();
+    cout << "-> ";
+    for (auto i: a1) cout << i << ' ';
+    cout << "\n";
+
+    int ind_min = a1.find(a1.min());
+    cout << ind_min << " -> " << a1[ind_min] << "\n";
+
+    if (a1 == a2) {
+        cout << "similar" << "\n";
+    }
+    if (a1 != a2) {
+        cout << "different" << "\n";
+    }
+
+    cout << "\n___________test out of range__________\n\n";
+
+    cout << a1[-1] << '\n';
+    cout << a1[0] << '\n';
+    cout << a1[a1.size() + 1] << '\n';
+}
+
+
+void swap(IntArray &b1, IntArrayRC &b2) {
+    if (b1.size() != b2.size()) {
+        cout << "ERROR: arrays have different sizes" << '\n';
+        return;
+    }
+    int temp;
+    for (int i = 0; i < b1.size(); ++i) {
+        temp = b1[i];
+        b1[i] = b2[i];
+        b2[i] = temp;
+    }
+}
+
+
+int main() {
+    cout << "\n~~~~~~~~~~~~~~~~~~~~IntArray~~~~~~~~~~~~~~~~~~~~~~\n";
+    test_IntArray();
+
+
+    cout << "\n\n\n~~~~~~~~~~~~~~~~~~~~test swap~~~~~~~~~~~~~~~~~~~~~~\n";
+    int a[] = {1, 5, 2, -100};
+    int b[] = {5, 4, 3, 2, 1};
+
+    IntArray a1(a, 5);
+    IntArrayRC b1(b, 5);
+    IntArrayRC b2(b, 3);
+
+    for(auto item: a1) cout << item << ' ';
+    cout << "& ";
+    for(auto item: b1) cout << item << ' ';
+    cout << "-> ";
+
+    swap(a1, b1);
+
+    for(auto item: a1) cout << item << ' ';
+    cout << "& ";
+    for(auto item: b1) cout << item << ' ';
+    cout << '\n';
+
+    swap(a1, b2);
+
+    cout << "\n\n\n~~~~~~~~~~~~~~~~~~~~IntArrayRC~~~~~~~~~~~~~~~~~~~~~~\n";
+    test_IntArrayRC();
 }

@@ -3,7 +3,7 @@
 //
 
 #include "IntArray.h"
-#include "cstdlib"
+#include "algorithm"
 
 
 void IntArray::Init(int size, const int* array) {
@@ -75,12 +75,8 @@ int IntArray::min() {
 }
 
 
-int ascending(const void * x, const void * y) {
-    return (*(int*)x - *(int*)y);
-}
-
 void IntArray::sort() {
-    qsort(_a, _size, sizeof(int), ascending);
+    std::sort(_a, _a + _size);
 }
 
 

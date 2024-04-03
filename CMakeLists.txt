@@ -7,4 +7,6 @@ add_executable(
         test_struct_and_class main.cpp
         IntArray.cpp
         IntArray.h
+        intArrayRC.cpp
+        intArrayRC.h
 )

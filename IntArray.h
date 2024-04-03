@@ -10,7 +10,7 @@
 
 class IntArray {
 
-private:
+protected:
     int* _a;
     int _size;
     static const int DEFAULT_SIZE_ARRAY = 100;
@@ -23,9 +23,9 @@ public:
     IntArray(const IntArray &array) { Init(array._size, array._a); };
     IntArray(int size, int val);
 
-    virtual ~IntArray() {}
+    virtual ~IntArray() { delete[] _a; };
 
-    int& operator[](int index);
+    virtual int& operator[](int index);
     void operator=(IntArray& other);
     bool operator==(IntArray& other);
     bool operator!=(IntArray& other);
@@ -38,6 +38,5 @@ public:
     void sort();
     int find(int val);
 };
-
 
 #endif //TEST_STRUCT_AND_CLASS_INTARRAY_H
