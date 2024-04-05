@@ -66,7 +66,8 @@ void test_IntArrayRC() {
     for (auto i: a2) cout << i << ' ';
     cout << "\n";
 
-    IntArrayRC a3(a2);
+    IntArray a_norm(b2, 2);
+    IntArrayRC a3(a_norm);
     for (auto i: a3) cout << i << ' ';
     cout << "\n";
 
@@ -113,17 +114,10 @@ void test_IntArrayRC() {
 }
 
 
-void swap(IntArray &b1, IntArrayRC &b2) {
-    if (b1.size() != b2.size()) {
-        cout << "ERROR: arrays have different sizes" << '\n';
-        return;
-    }
-    int temp;
-    for (int i = 0; i < b1.size(); ++i) {
-        temp = b1[i];
-        b1[i] = b2[i];
-        b2[i] = temp;
-    }
+void swap(int i, int j, IntArray &a) {
+    int temp = a[i];
+    a[i] = a[j];
+    a[j] = temp;
 }
 
 
@@ -136,23 +130,21 @@ int main() {
     int a[] = {1, 5, 2, -100};
     int b[] = {5, 4, 3, 2, 1};
 
-    IntArray a1(a, 5);
+    IntArray a1(a, 4);
     IntArrayRC b1(b, 5);
     IntArrayRC b2(b, 3);
 
     for(auto item: a1) cout << item << ' ';
-    cout << "& ";
-    for(auto item: b1) cout << item << ' ';
+    swap(0, 1, a1);
     cout << "-> ";
-
-    swap(a1, b1);
-
     for(auto item: a1) cout << item << ' ';
-    cout << "& ";
-    for(auto item: b1) cout << item << ' ';
-    cout << '\n';
 
-    swap(a1, b2);
+    cout <<'\n';
+    for(auto item: b1) cout << item << ' ';
+    swap(0, 1, b1);
+    cout << "-> ";
+    for(auto item: b1) cout << item << ' ';
+
 
     cout << "\n\n\n~~~~~~~~~~~~~~~~~~~~IntArrayRC~~~~~~~~~~~~~~~~~~~~~~\n";
     test_IntArrayRC();
